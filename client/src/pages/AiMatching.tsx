@@ -85,7 +85,7 @@ export function AiMatching() {
     <div className="mx-auto max-w-5xl space-y-6">
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <Badge className="mb-3 bg-blue-50 text-blue-700 hover:bg-blue-50">
-          Road-In AI 내비게이션
+          Mapjiri AI 내비게이션
         </Badge>
         <h1 className="text-3xl font-black tracking-tight text-slate-950">다음 성장 루트를 찾습니다</h1>
         <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-slate-500">

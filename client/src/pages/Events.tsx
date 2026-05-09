@@ -25,7 +25,7 @@ const events = [
   },
   {
     id: 3,
-    title: "Road-In 미니 해커톤",
+    title: "Mapjiri 미니 해커톤",
     date: "2026.06.01",
     location: "아주대학교",
     category: "해커톤",

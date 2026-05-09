@@ -179,7 +179,7 @@ export function Home() {
                 map-based campus community
               </Badge>
               <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-4xl">
-                Road-In
+                Mapjiri
               </h1>
               <p className="mt-3 max-w-md text-sm font-bold leading-6 text-slate-500 sm:text-base">
                 최종 목적지를 향해 지도 위를 이동하며 성장하는 대학생들의 캠퍼스 성장 지도입니다.

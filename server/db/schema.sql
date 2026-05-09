@@ -4,6 +4,29 @@ CREATE DATABASE IF NOT EXISTS aingthons
 
 USE aingthons;
 
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(80) NOT NULL DEFAULT '',
+  university VARCHAR(120) NOT NULL DEFAULT '',
+  major VARCHAR(120) NOT NULL DEFAULT '',
+  interests VARCHAR(255) NOT NULL DEFAULT '',
+  coins INT UNSIGNED NOT NULL DEFAULT 0,
+  attendance_weeks INT UNSIGNED NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO users (id, name, university, major, interests, coins, attendance_weeks)
+VALUES (1, '김세종', '아주대학교', '소프트웨어학과', 'AI · 개발 · 창업', 320, 2)
+ON DUPLICATE KEY UPDATE
+  name = VALUES(name),
+  university = VALUES(university),
+  major = VALUES(major),
+  interests = VALUES(interests),
+  coins = VALUES(coins),
+  attendance_weeks = VALUES(attendance_weeks);
+
 CREATE TABLE IF NOT EXISTS contests (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   title VARCHAR(255) NOT NULL,

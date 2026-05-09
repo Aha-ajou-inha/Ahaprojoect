@@ -45,6 +45,18 @@ interface RecruitmentRow extends RowDataPacket {
   updated_at: string;
 }
 
+interface UserRow extends RowDataPacket {
+  id: number;
+  name: string;
+  university: string;
+  major: string;
+  interests: string;
+  coins: number;
+  attendance_weeks: number;
+  created_at: string;
+  updated_at: string;
+}
+
 interface TeamProfileRow extends RowDataPacket {
   id: number;
   name: string;
@@ -736,6 +748,84 @@ app.post("/api/ai/moderate", (req, res) => {
     reason: matched?.reason ?? "커뮤니티 정책 위반 가능성이 낮습니다.",
   });
 });
+
+const mapUser = (row: UserRow) => ({
+  id: row.id,
+  name: row.name,
+  university: row.university,
+  major: row.major,
+  interests: row.interests,
+  coins: row.coins,
+  attendanceWeeks: row.attendance_weeks,
+  createdAt: row.created_at,
+  updatedAt: row.updated_at,
+});
+
+app.get("/api/users/:id", asyncRoute(async (req, res) => {
+  const id = getId(req);
+
+  if (!id) {
+    res.status(400).json({ error: "Invalid user id" });
+    return;
+  }
+
+  const rows = await selectRows<UserRow[]>(
+    `SELECT id, name, university, major, interests, coins, attendance_weeks, created_at, updated_at
+     FROM users WHERE id = ?`,
+    [id],
+  );
+  const user = rows[0];
+
+  if (!user) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+
+  res.json({ user: mapUser(user) });
+}));
+
+app.put("/api/users/:id", asyncRoute(async (req, res) => {
+  const id = getId(req);
+
+  if (!id) {
+    res.status(400).json({ error: "Invalid user id" });
+    return;
+  }
+
+  const rows = await selectRows<UserRow[]>(
+    `SELECT id, name, university, major, interests, coins, attendance_weeks, created_at, updated_at
+     FROM users WHERE id = ?`,
+    [id],
+  );
+  const current = rows[0];
+
+  if (!current) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+
+  await executeQuery(
+    `UPDATE users SET name = ?, university = ?, major = ?, interests = ?, coins = ?, attendance_weeks = ?
+     WHERE id = ?`,
+    [
+      asText(req.body.name, current.name),
+      asText(req.body.university, current.university),
+      asText(req.body.major, current.major),
+      asText(req.body.interests, current.interests),
+      asInt(req.body.coins, current.coins),
+      asInt(req.body.attendanceWeeks, current.attendance_weeks),
+      id,
+    ],
+  );
+
+  const updated = await selectRows<UserRow[]>(
+    `SELECT id, name, university, major, interests, coins, attendance_weeks, created_at, updated_at
+     FROM users WHERE id = ?`,
+    [id],
+  );
+
+  res.json({ user: mapUser(updated[0]) });
+}));
 
 app.post("/api/ai/match-mentor", (_req, res) => {
   res.redirect(307, "/api/ai/mentoring-match");

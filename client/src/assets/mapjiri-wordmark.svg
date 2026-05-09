@@ -1,43 +1,53 @@
-<svg width="276" height="84" viewBox="0 0 276 84" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+<svg width="320" height="72" viewBox="0 0 320 72" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="mapjiri-blue" x1="16" y1="16" x2="258" y2="68" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#4F7CFF" />
-      <stop offset="1" stop-color="#2F62E8" />
+    <linearGradient id="pin-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B8FFF"/>
+      <stop offset="100%" stop-color="#4F7CFF"/>
     </linearGradient>
-    <filter id="mapjiri-shadow" x="7" y="11" width="262" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#2F62E8" flood-opacity="0.14" />
-    </filter>
   </defs>
-  <g filter="url(#mapjiri-shadow)">
-    <path
-      d="M18 56V24C18 19.6 21.6 16 26 16H38.8C45.1756 16 51.29 18.5325 56 23.04V58C51.29 53.4925 45.1756 50.96 38.8 50.96H24C20.6863 50.96 18 53.6463 18 56Z"
-      fill="white"
-      stroke="url(#mapjiri-blue)"
-      stroke-width="4"
-      stroke-linejoin="round"
-    />
-    <path
-      d="M56 58V23.04C60.71 18.5325 66.8244 16 73.2 16H86C90.4183 16 94 19.5817 94 24V56C94 53.6463 91.3137 50.96 88 50.96H73.2C66.8244 50.96 60.71 53.4925 56 58Z"
-      fill="white"
-      stroke="url(#mapjiri-blue)"
-      stroke-width="4"
-      stroke-linejoin="round"
-    />
-    <path d="M56 22V58" stroke="url(#mapjiri-blue)" stroke-width="4" stroke-linecap="round" />
-    <path d="M31 29H44" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
-    <path d="M69 29H82" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
-    <path d="M31 37H44" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
-    <path d="M69 37H82" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
-    <text
-      x="108"
-      y="55"
-      fill="url(#mapjiri-blue)"
-      font-family="Trebuchet MS, Verdana, Arial, sans-serif"
-      font-size="42"
-      font-weight="800"
-      letter-spacing="-1.2"
-    >
-      Mapjiri
-    </text>
-  </g>
+
+  <!-- ── Map body ── -->
+  <!-- Main white rectangle with rounded corners -->
+  <rect x="5" y="14" width="50" height="48" rx="7" fill="white" stroke="#6B8FFF" stroke-width="2.2"/>
+
+  <!-- Top-left folded flap -->
+  <path d="M5 14 L5 30 L21 14 Z" fill="#D8E6FF" stroke="#6B8FFF" stroke-width="2.2" stroke-linejoin="round"/>
+
+  <!-- Top-right folded flap (blue accent) -->
+  <path d="M55 14 L55 26 L43 14 Z" fill="#6B8FFF" stroke="#6B8FFF" stroke-width="2.2" stroke-linejoin="round"/>
+
+  <!-- ── Location pin ── -->
+  <circle cx="23" cy="26" r="6" fill="url(#pin-grad)"/>
+  <circle cx="23" cy="26" r="2.6" fill="white"/>
+  <!-- pin tail -->
+  <path d="M23 32 L23 36" stroke="#4F7CFF" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- ── Dashed route ── -->
+  <path d="M30 30 Q40 22 48 32" stroke="#B8CEFF" stroke-width="2" stroke-dasharray="3.5 3" stroke-linecap="round" fill="none"/>
+
+  <!-- ── Road lines (bottom-left) ── -->
+  <line x1="8" y1="46" x2="17" y2="38" stroke="#C8D8FF" stroke-width="2" stroke-linecap="round"/>
+  <line x1="13" y1="57" x2="20" y2="48" stroke="#C8D8FF" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- ── Face: eyes ── -->
+  <ellipse cx="24" cy="45" rx="2.8" ry="3.2" fill="#2B3A8F"/>
+  <ellipse cx="36" cy="45" rx="2.8" ry="3.2" fill="#2B3A8F"/>
+
+  <!-- ── Cheeks ── -->
+  <ellipse cx="18.5" cy="50" rx="3.2" ry="1.8" fill="#BDD0FF" opacity="0.75"/>
+  <ellipse cx="41.5" cy="50" rx="3.2" ry="1.8" fill="#BDD0FF" opacity="0.75"/>
+
+  <!-- ── Smile ── -->
+  <path d="M25 53 Q30 58 35 53" stroke="#2B3A8F" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+  <!-- ── Wordmark text ── -->
+  <text
+    x="66"
+    y="48"
+    fill="#4F7CFF"
+    font-family="Trebuchet MS, Verdana, Arial, sans-serif"
+    font-size="36"
+    font-weight="800"
+    letter-spacing="-1"
+  >Mapjiri</text>
 </svg>

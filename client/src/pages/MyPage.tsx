@@ -1,207 +1,169 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BadgeCheck, CalendarCheck2, Coins, Flame, Gift, Target } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronRight, MessageCircle, Heart, Star, PenLine, Settings, Trophy, Play, Users } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import {
-  getAttendanceReward,
   getCoinsUntilNextLevel,
-  getConsultCoinCost,
   getGrowthLevel,
   getGrowthProgress,
   getNextGrowthLevel,
   LevelJourney,
-  Mapjiri,
-  TransportIcon,
-  userRoadInStats,
 } from "@/lib/roadin";
 
-const coinHistory = [
-  { id: 1, title: "연속 출석 2주차 보상", amount: 3, type: "earn", date: "오늘" },
-  { id: 2, title: "Lv.3 따릉이 멘토 60분 상담", amount: -getConsultCoinCost(60, 3), type: "spend", date: "어제" },
-  { id: 3, title: "스터디 로드 모집글 작성", amount: 20, type: "earn", date: "5월 7일" },
-  { id: 4, title: "AI 활동 추천 완료", amount: 10, type: "earn", date: "5월 6일" },
+type User = {
+  id: number;
+  name: string;
+  university: string;
+  major: string;
+  interests: string;
+  coins: number;
+  attendanceWeeks: number;
+};
+
+const recentActivities = [
+  { id: 1, icon: <MessageCircle className="h-5 w-5 text-white" />, iconBg: "bg-blue-500", title: "선배와 고민 상담 완료", coins: 30, time: "2시간 전" },
+  { id: 2, icon: <Play className="h-5 w-5 text-white" />, iconBg: "bg-yellow-400", title: "IT 개발 세미나 시청 완료", coins: 20, time: "1일 전" },
+  { id: 3, icon: <Users className="h-5 w-5 text-white" />, iconBg: "bg-green-500", title: "마케팅 동아리 활동 인증", coins: 15, time: "2일 전" },
+  { id: 4, icon: <Trophy className="h-5 w-5 text-white" />, iconBg: "bg-blue-400", title: "공모전 팀원으로 지원", coins: 10, time: "3일 전" },
 ];
 
-const missions = [
-  { id: 1, title: "오늘 관심 공모전 1개 저장", reward: 1, progress: 67 },
+const shortcuts = [
+  { icon: <MessageCircle className="h-5 w-5 text-slate-500" />, label: "나의 상담 내역", to: "/" },
+  { icon: <Heart className="h-5 w-5 text-slate-500" />, label: "찜 목록", to: "/" },
+  { icon: <Star className="h-5 w-5 text-slate-500" />, label: "참여한 활동", to: "/" },
+  { icon: <PenLine className="h-5 w-5 text-slate-500" />, label: "내가 쓴 글", to: "/" },
+  { icon: <Settings className="h-5 w-5 text-slate-500" />, label: "설정", to: "/" },
 ];
 
 export function MyPage() {
-  const user = {
-    name: userRoadInStats.name,
-    university: "세종대학교",
-    major: "컴퓨터공학과",
-    year: 3,
-    coins: userRoadInStats.coins,
-    goal: "이번 학기에는 React 프로젝트 2개 완성, 오픈소스 기여 1회 달성",
-  };
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/users/1")
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="flex items-center justify-center py-20 text-slate-500">불러오는 중...</div>;
+  }
+
+  if (!user) {
+    return <div className="flex items-center justify-center py-20 text-slate-500">유저 정보를 불러올 수 없습니다.</div>;
+  }
 
   const currentLevel = getGrowthLevel(user.coins);
   const nextLevel = getNextGrowthLevel(user.coins);
   const progressPercentage = getGrowthProgress(user.coins);
   const coinsUntilNext = getCoinsUntilNextLevel(user.coins);
-  const attendanceReward = getAttendanceReward(userRoadInStats.attendanceWeeks);
+  const minCoins = currentLevel.coins;
+  const maxCoins = nextLevel ? nextLevel.coins : currentLevel.coins;
 
   return (
-    <div className="space-y-6">
-      <section className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-black tracking-tight text-slate-950">나의 Road-In</h1>
-          <p className="mt-2 text-sm font-medium text-slate-500">
-            맵지리와 함께 코인을 모으고 다음 이동수단으로 성장하세요.
-          </p>
+    <div className="space-y-6 pb-10">
+      {/* 프로필 헤더 배너 */}
+      <section className="rounded-2xl bg-blue-600 p-6 text-white shadow-md">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center">
+          <div className="flex-shrink-0">
+            <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-white/30 bg-white/20">
+              <img
+                src={`/step${currentLevel.level}.png`}
+                alt="맵지리"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          </div>
+
+          <div className="flex-1 space-y-2">
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-black">{user.name}</h1>
+              <span className="rounded-full bg-white/20 px-3 py-1 text-sm font-bold">
+                Lv.{currentLevel.level} {currentLevel.name}
+              </span>
+            </div>
+            <div className="space-y-1 text-sm font-medium text-blue-100">
+              <p>🏛 {user.university}</p>
+              <p>🎓 {user.major}</p>
+              <p>🤍 {user.interests}</p>
+            </div>
+          </div>
+
+          <div className="flex-1 space-y-2">
+            <div className="flex justify-between text-sm font-bold text-blue-100">
+              <span>다음 레벨까지</span>
+              <span>{coinsUntilNext} 코인 남음</span>
+            </div>
+            <Progress value={progressPercentage} className="h-3 bg-white/20 [&>div]:bg-white" />
+            <div className="flex justify-between text-xs font-semibold text-blue-200">
+              <span>Lv.{currentLevel.level} {currentLevel.name}<br />({minCoins} 코인)</span>
+              {nextLevel && (
+                <span className="text-right">Lv.{nextLevel.level} {nextLevel.name}<br />({maxCoins} 코인)</span>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-xl bg-white p-4 text-center shadow-sm">
+            <p className="text-sm font-bold text-slate-500">보유 코인</p>
+            <div className="flex items-center justify-center gap-1 mt-1">
+              <span className="text-2xl">🪙</span>
+              <span className="text-3xl font-black text-slate-900">{user.coins}</span>
+              <span className="text-base font-bold text-slate-500">코인</span>
+            </div>
+            <p className="mt-1 text-xs text-slate-400">({minCoins} ~ {maxCoins} 코인 구간)</p>
+          </div>
         </div>
-        <Button asChild variant="outline">
-          <Link to="/onboarding">프로필 수정</Link>
-        </Button>
       </section>
 
-      <div className="grid gap-5 lg:grid-cols-[1fr_340px]">
-        <Card className="overflow-hidden border-blue-100">
-          <CardContent className="grid gap-6 p-6 md:grid-cols-[120px_1fr]">
-            <Mapjiri level={currentLevel.level} className="mx-auto h-28 w-28" />
-            <div className="min-w-0 space-y-4">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <h2 className="text-2xl font-black">{user.name}</h2>
-                  <p className="mt-1 text-sm font-semibold text-slate-500">
-                    {user.university} · {user.major} · {user.year}학년
-                  </p>
-                </div>
-                <Badge className={`w-fit px-3 py-1.5 text-sm font-black ${currentLevel.tone}`}>
-                  Lv.{currentLevel.level} {currentLevel.name}
-                </Badge>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-lg bg-blue-50 p-3">
-                  <Coins className="mb-2 h-4 w-4 text-blue-700" />
-                  <p className="text-xs font-bold text-slate-500">보유 코인</p>
-                  <p className="text-xl font-black text-slate-950">{user.coins} C</p>
-                </div>
-                <div className="rounded-lg bg-emerald-50 p-3">
-                  <TransportIcon level={currentLevel.level} className="mb-2 h-4 w-4 text-emerald-700" />
-                  <p className="text-xs font-bold text-slate-500">이동수단</p>
-                  <p className="text-xl font-black text-slate-950">{currentLevel.transport}</p>
-                </div>
-                <div className="rounded-lg bg-amber-50 p-3">
-                  <Target className="mb-2 h-4 w-4 text-amber-600" />
-                  <p className="text-xs font-bold text-slate-500">대관 할인</p>
-                  <p className="text-xl font-black text-slate-950">{currentLevel.discount}%</p>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="font-bold text-slate-500">
-                    {nextLevel ? `다음 등급: Lv.${nextLevel.level} ${nextLevel.name}` : "최고 등급 도착"}
-                  </span>
-                  <span className="font-black text-blue-700">{progressPercentage}%</span>
-                </div>
-                <Progress value={progressPercentage} className="h-3 bg-blue-100" />
-                <p className="text-xs font-bold text-slate-500">
-                  {nextLevel ? `${coinsUntilNext}코인을 더 모으면 ${nextLevel.transport}로 이동합니다.` : "우주대장까지 성장했습니다."}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-blue-100 bg-blue-50/60">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg font-black">
-              <CalendarCheck2 className="h-5 w-5 text-blue-700" />
-              연속 출석 보상
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-2 text-4xl font-black text-blue-700">
-              +{attendanceReward} <span className="text-xl text-slate-700">C</span>
-            </div>
-            <p className="text-sm font-medium leading-6 text-slate-600">
-              오늘 로드미션을 완료해야 출석이 인정됩니다. 현재 {userRoadInStats.attendanceWeeks}주 연속 출석 중입니다.
-            </p>
-            <Progress value={userRoadInStats.attendanceProgress} className="mt-4 h-2 bg-white" />
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg font-black">맵지리의 성장 여정</CardTitle>
-        </CardHeader>
-        <CardContent>
+      {/* 성장 단계 + 최근 활동 */}
+      <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="mb-4 text-lg font-black text-slate-900">성장 단계</h2>
           <LevelJourney currentLevel={currentLevel.level} />
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-5 lg:grid-cols-[1fr_360px]">
-        <div className="space-y-5">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg font-black">
-                <Target className="h-5 w-5 text-emerald-600" />
-                현재 목적지
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 text-sm font-semibold leading-6 text-slate-700">
-                {user.goal}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">React</Badge>
-                <Badge variant="secondary">Open Source</Badge>
-                <Badge variant="secondary">Road-In 루트</Badge>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-black">코인 활동 내역</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {coinHistory.map((item) => (
-                <div key={item.id} className="flex items-center justify-between rounded-lg border border-slate-100 bg-white p-4">
-                  <div>
-                    <p className="font-black text-slate-950">{item.title}</p>
-                    <p className="mt-1 text-sm font-medium text-slate-500">{item.date}</p>
-                  </div>
-                  <span className={`text-lg font-black ${item.type === "earn" ? "text-blue-700" : "text-red-500"}`}>
-                    {item.amount > 0 ? "+" : ""}
-                    {item.amount} C
-                  </span>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
         </div>
 
-        <div className="space-y-5">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg font-black">
-                <Flame className="h-5 w-5 text-red-500" />
-                오늘의 로드 미션
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {missions.map((mission) => (
-                <div key={mission.id} className="space-y-2 rounded-lg border border-slate-100 p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-black text-slate-950">{mission.title}</p>
-                      <p className="mt-1 text-sm font-bold text-blue-700">완료 시 출석 인정 · +{mission.reward} C</p>
-                    </div>
-                    {mission.progress === 100 ? <BadgeCheck className="h-5 w-5 text-emerald-600" /> : <Gift className="h-5 w-5 text-slate-400" />}
-                  </div>
-                  <Progress value={mission.progress} className="h-2" />
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-black text-slate-900">최근 활동</h2>
+            <button className="flex items-center gap-0.5 text-sm font-bold text-blue-600">
+              전체 보기 <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="space-y-3">
+            {recentActivities.map((activity) => (
+              <div key={activity.id} className="flex items-center gap-3">
+                <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl ${activity.iconBg}`}>
+                  {activity.icon}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+                <div className="flex-1 min-w-0">
+                  <p className="truncate text-sm font-bold text-slate-900">{activity.title}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-black text-blue-600">+{activity.coins} 코인</p>
+                  <p className="text-xs text-slate-400">{activity.time}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 바로가기 */}
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="mb-4 text-lg font-black text-slate-900">바로가기</h2>
+        <div className="grid grid-cols-5 gap-3">
+          {shortcuts.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="flex flex-col items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-2 py-4 text-center transition hover:bg-blue-50 hover:border-blue-100"
+            >
+              {item.icon}
+              <span className="text-xs font-bold text-slate-600">{item.label}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

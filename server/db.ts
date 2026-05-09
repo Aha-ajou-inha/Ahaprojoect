@@ -21,7 +21,10 @@ const getPoolConfig = (): PoolOptions | string => {
     waitForConnections: true,
     connectionLimit: toNumber(process.env.MYSQL_CONNECTION_LIMIT, 10),
     charset: "utf8mb4",
+    collation: "utf8mb4_unicode_ci",
     dateStrings: true,
+    multipleStatements: false,
+    timezone: "+00:00",
   };
 };
 

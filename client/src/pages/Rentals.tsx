@@ -14,7 +14,6 @@ import {
   Plus,
   Search,
   Sparkles,
-  Star,
   Users,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";

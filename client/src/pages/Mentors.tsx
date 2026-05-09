@@ -17,7 +17,6 @@ import {
   Phone,
   Users,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -86,7 +85,6 @@ type MatchThread = {
 
 const ROADIN_USER = { name: "김맵지", coins: 750 };
 const COUNSEL_FIELDS: ConsultingField[] = ["취업", "진로/커리어", "스펙/자격증", "대학생활", "기타"];
-const TIME_OPTIONS = [10, 20, 30, 40, 50, 60];
 const EMPTY_DRAFT: ConcernDraft = { title: "", content: "", fields: ["진로/커리어"], method: "채팅" };
 
 const STORAGE_KEYS = {

@@ -14,7 +14,7 @@ type Message = {
 
 export function Chat() {
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, text: "안녕하세요. 프론트엔드 모의 면접 멘토링으로 매칭된 김선배입니다.", sender: "mentor", time: "14:02" },
+    { id: 1, text: "안녕하세요. 프론트엔드 모의 면접 상담으로 매칭된 김선배입니다.", sender: "mentor", time: "14:02" },
     { id: 2, text: "사전에 이력서나 포트폴리오를 보내주시면 면접 질문을 더 정확히 준비할 수 있어요.", sender: "mentor", time: "14:03" },
     { id: 3, text: "안녕하세요 멘토님. 반갑습니다.", sender: "me", time: "14:10" },
     { id: 4, text: "깃허브 링크와 이력서 PDF를 잠시 후 보내드리겠습니다.", sender: "me", time: "14:11" },

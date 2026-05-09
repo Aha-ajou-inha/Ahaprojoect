@@ -637,7 +637,7 @@ app.post("/api/ai/mentoring-match", async (req, res) => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `
-      당신은 대학생 커뮤니티 'UniLink'의 스마트한 AI 선배 매칭 도우미입니다.
+      당신은 대학생 커뮤니티 'Road-In'의 스마트한 AI 선배 매칭 도우미입니다.
       학생의 다음 취업/학업 고민을 읽고, 이 학생에게 가장 도움이 될 만한 가상의 현직자/선배 멘토 2명을 추천해주세요.
       답변은 친절하고 공감하는 말투로 작성하며, 
       각 멘토에 대해 [이름/직무], [간단한 스펙], [추천하는 이유]를 명확히 제시해주세요.

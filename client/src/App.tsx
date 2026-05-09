@@ -5,7 +5,7 @@ import { MyPage } from "./pages/MyPage";
 import { Onboarding } from "./pages/Onboarding";
 import { Recruitment } from "./pages/Recruitment";
 import { Recommendation } from "./pages/Recommendation";
-import { TeamMatching } from "./pages/TeamMatching";
+import { Rentals } from "./pages/Rentals";
 import { Schedule } from "./pages/Schedule";
 import { Chat } from "./pages/Chat";
 import { Promotion } from "./pages/Promotion";
@@ -13,9 +13,6 @@ import { AiMatching } from "./pages/AiMatching";
 import { PortfolioFeedback } from "./pages/PortfolioFeedback";
 import { Events } from "./pages/Events";
 import { Mentors } from "./pages/Mentors";
-import { Board } from "./pages/Board";
-import { Clubs } from "./pages/Clubs";
-import { Community } from "./pages/Community";
 
 function App() {
   return (
@@ -27,9 +24,6 @@ function App() {
           <Route path="onboarding" element={<Onboarding />} />
           <Route path="coins" element={<MyPage />} />
           <Route path="events" element={<Events />} />
-          <Route path="clubs" element={<Clubs />} />
-          <Route path="board" element={<Board />} />
-          <Route path="community" element={<Community />} />
           <Route path="mentors" element={<Mentors />} />
           <Route path="mentors/request" element={<Mentors />} />
           <Route path="mentors/schedule" element={<Schedule />} />
@@ -41,8 +35,9 @@ function App() {
           <Route path="recruitment" element={<Recruitment />} />
           <Route path="recommendation" element={<Recommendation />} />
           <Route path="contests" element={<Recommendation />} />
-          <Route path="team-matching" element={<TeamMatching />} />
-          <Route path="teams" element={<TeamMatching />} />
+          <Route path="rentals" element={<Rentals />} />
+          <Route path="rental" element={<Rentals />} />
+          <Route path="rooms" element={<Rentals />} />
           <Route path="studies" element={<Recruitment />} />
           <Route path="promotion" element={<Promotion />} />
           <Route path="portfolio" element={<PortfolioFeedback />} />

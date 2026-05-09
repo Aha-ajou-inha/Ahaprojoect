@@ -10,8 +10,8 @@ export function Schedule() {
   const upcomingEvents = [
     {
       id: 1,
-      title: "프론트엔드 모의 면접 멘토링",
-      type: "멘토링",
+      title: "프론트엔드 모의 면접 상담",
+      type: "상담",
       time: "오늘 19:00 - 20:00",
       location: "Google Meet",
       with: "김선배 멘토",
@@ -35,7 +35,7 @@ export function Schedule() {
           <CalendarIcon className="h-4 w-4" />
           일정 관리
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-950">멘토링과 팀 일정을 한눈에 관리하세요</h1>
+        <h1 className="text-3xl font-black tracking-tight text-slate-950">상담과 팀 일정을 한눈에 관리하세요</h1>
         <p className="mt-2 text-sm font-medium text-slate-500">
           매칭 이후의 상담, 회의, 스터디 약속을 캘린더와 리스트로 확인합니다.
         </p>
@@ -73,7 +73,7 @@ export function Schedule() {
               <Card key={event.id} className="transition-colors hover:border-blue-200">
                 <CardContent className="p-5">
                   <div className="mb-4 flex items-start justify-between gap-3">
-                    <Badge className={event.type === "멘토링" ? "bg-blue-600 text-white" : "bg-emerald-600 text-white"}>
+                    <Badge className={event.type === "상담" ? "bg-blue-600 text-white" : "bg-emerald-600 text-white"}>
                       {event.type}
                     </Badge>
                     <span className="text-sm font-black text-red-500">{event.time.split(" ")[0]}</span>

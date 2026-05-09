@@ -1,0 +1,43 @@
+<svg width="276" height="84" viewBox="0 0 276 84" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+  <defs>
+    <linearGradient id="mapjiri-blue" x1="16" y1="16" x2="258" y2="68" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F7CFF" />
+      <stop offset="1" stop-color="#2F62E8" />
+    </linearGradient>
+    <filter id="mapjiri-shadow" x="7" y="11" width="262" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#2F62E8" flood-opacity="0.14" />
+    </filter>
+  </defs>
+  <g filter="url(#mapjiri-shadow)">
+    <path
+      d="M18 56V24C18 19.6 21.6 16 26 16H38.8C45.1756 16 51.29 18.5325 56 23.04V58C51.29 53.4925 45.1756 50.96 38.8 50.96H24C20.6863 50.96 18 53.6463 18 56Z"
+      fill="white"
+      stroke="url(#mapjiri-blue)"
+      stroke-width="4"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M56 58V23.04C60.71 18.5325 66.8244 16 73.2 16H86C90.4183 16 94 19.5817 94 24V56C94 53.6463 91.3137 50.96 88 50.96H73.2C66.8244 50.96 60.71 53.4925 56 58Z"
+      fill="white"
+      stroke="url(#mapjiri-blue)"
+      stroke-width="4"
+      stroke-linejoin="round"
+    />
+    <path d="M56 22V58" stroke="url(#mapjiri-blue)" stroke-width="4" stroke-linecap="round" />
+    <path d="M31 29H44" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
+    <path d="M69 29H82" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
+    <path d="M31 37H44" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
+    <path d="M69 37H82" stroke="#9CB7FF" stroke-width="3" stroke-linecap="round" />
+    <text
+      x="108"
+      y="55"
+      fill="url(#mapjiri-blue)"
+      font-family="Trebuchet MS, Verdana, Arial, sans-serif"
+      font-size="42"
+      font-weight="800"
+      letter-spacing="-1.2"
+    >
+      Mapjiri
+    </text>
+  </g>
+</svg>

@@ -72,7 +72,7 @@ export function Promotion() {
               <Input
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
-                placeholder="예: Road-In 해커톤 팀원 모집"
+                placeholder="예: Mapjiri 해커톤 팀원 모집"
               />
             </div>
             <div className="space-y-2">

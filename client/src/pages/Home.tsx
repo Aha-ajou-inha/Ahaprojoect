@@ -52,51 +52,36 @@ type HomeTeam = {
 const mapCases = [
   {
     title: "스터디 모집",
-    mobileTitle: "스터디",
-    location: "강남역",
-    initials: "민",
-    tone: "bg-blue-600",
-    className: "left-[14%] top-[15%]",
+    location: "아주대학교",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=80&h=80",
+    cx: 20, cy: 46,
   },
   {
     title: "프로젝트 팀원 모집",
-    mobileTitle: "프로젝트",
-    location: "홍대입구역",
-    initials: "준",
-    tone: "bg-sky-600",
-    className: "right-[9%] top-[9%]",
+    location: "광교 테크노밸리",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=80&h=80",
+    cx: 62, cy: 36,
   },
   {
     title: "IT 연합 동아리",
-    mobileTitle: "동아리",
-    location: "건국대",
-    initials: "서",
-    tone: "bg-violet-600",
-    className: "left-[10%] bottom-[18%]",
+    location: "수원역",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=80&h=80",
+    cx: 24, cy: 78,
   },
   {
     title: "공모전 팀원 모집",
-    mobileTitle: "공모전팀",
-    location: "서울대입구역",
-    initials: "하",
-    tone: "bg-emerald-600",
-    className: "right-[10%] bottom-[19%]",
+    location: "인천 송도",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=80&h=80",
+    cx: 68, cy: 74,
   },
 ];
 
 const nearbyRoads = [
-  { title: "공공데이터 공모전 팀", place: "서울대입구", type: "공모전", distance: "1.2km", icon: Trophy },
-  { title: "React 밤샘 스터디", place: "강남역", type: "스터디", distance: "2.4km", icon: BookOpenCheck },
-  { title: "제품 기획 사이드 프로젝트", place: "홍대입구", type: "프로젝트", distance: "3.1km", icon: Users },
+  { title: "공공데이터 공모전 팀", place: "아주대학교", type: "공모전", distance: "0.3km", icon: Trophy },
+  { title: "React 밤샘 스터디", place: "광교 테크노밸리", type: "스터디", distance: "1.2km", icon: BookOpenCheck },
+  { title: "제품 기획 사이드 프로젝트", place: "수원역", type: "프로젝트", distance: "2.4km", icon: Users },
 ];
 
-const mapDots = [
-  "left-[39%] top-[38%] bg-blue-500",
-  "left-[58%] top-[49%] bg-blue-500",
-  "left-[64%] top-[31%] bg-blue-500",
-  "right-[19%] top-[42%] bg-teal-500",
-  "right-[10%] top-[28%] bg-teal-500",
-];
 
 export function Home() {
   const dummyContests = useMemo<HomeContest[]>(() => [
@@ -194,7 +179,7 @@ export function Home() {
                 map-based campus community
               </Badge>
               <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-4xl">
-                Road-In
+                Mapjiri
               </h1>
               <p className="mt-3 max-w-md text-sm font-bold leading-6 text-slate-500 sm:text-base">
                 최종 목적지를 향해 지도 위를 이동하며 성장하는 대학생들의 캠퍼스 성장 지도입니다.
@@ -217,54 +202,74 @@ export function Home() {
             </div>
           </div>
 
-          <div className="relative min-h-[250px] overflow-hidden border-t border-blue-100 bg-slate-50 lg:min-h-[310px] lg:border-l lg:border-t-0">
-            <div className="absolute inset-0 bg-[linear-gradient(30deg,transparent_0_18%,rgba(148,163,184,0.34)_19%,rgba(148,163,184,0.34)_20%,transparent_21%_100%),linear-gradient(146deg,transparent_0_26%,rgba(148,163,184,0.3)_27%,rgba(148,163,184,0.3)_28%,transparent_29%_100%),linear-gradient(84deg,transparent_0_44%,rgba(148,163,184,0.26)_45%,rgba(148,163,184,0.26)_46%,transparent_47%_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(191,219,254,0.58),transparent_18%),radial-gradient(circle_at_76%_22%,rgba(186,230,253,0.55),transparent_18%),radial-gradient(circle_at_69%_76%,rgba(187,247,208,0.42),transparent_20%),radial-gradient(circle_at_32%_78%,rgba(254,240,138,0.34),transparent_16%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.22)_42%,rgba(255,255,255,0)_100%)]" />
-            <div className="absolute left-[43%] top-[40%] hidden h-px w-[21%] rotate-[-16deg] bg-blue-300/80 sm:block" />
-            <div className="absolute left-[55%] top-[45%] hidden h-px w-[25%] rotate-[18deg] bg-blue-300/80 sm:block" />
-            <div className="absolute right-[15%] top-[35%] hidden h-px w-[17%] rotate-[-8deg] bg-emerald-300/80 sm:block" />
+          <div className="relative min-h-[250px] overflow-hidden border-t border-blue-100 lg:min-h-[310px] lg:border-l lg:border-t-0">
+            {/* 지도 스타일 배경 (SVG 도로망) */}
+            <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* 배경 */}
+              <rect width="100%" height="100%" fill="#eef2f7" />
+              {/* 블록들 */}
+              <rect x="0" y="0" width="38%" height="42%" fill="#e8edf4" />
+              <rect x="42%" y="0" width="30%" height="35%" fill="#e8edf4" />
+              <rect x="75%" y="0" width="25%" height="55%" fill="#e8edf4" />
+              <rect x="0" y="50%" width="28%" height="50%" fill="#e8edf4" />
+              <rect x="32%" y="55%" width="35%" height="45%" fill="#e8edf4" />
+              <rect x="72%" y="60%" width="28%" height="40%" fill="#e8edf4" />
+              {/* 주요 도로 (굵은 선) */}
+              <line x1="0" y1="42%" x2="100%" y2="42%" stroke="#d4d9e3" strokeWidth="8" />
+              <line x1="38%" y1="0" x2="38%" y2="100%" stroke="#d4d9e3" strokeWidth="8" />
+              <line x1="72%" y1="0" x2="72%" y2="100%" stroke="#d4d9e3" strokeWidth="6" />
+              <line x1="0" y1="70%" x2="100%" y2="70%" stroke="#d4d9e3" strokeWidth="6" />
+              {/* 보조 도로 */}
+              <line x1="15%" y1="0" x2="15%" y2="100%" stroke="#dde2ec" strokeWidth="3" />
+              <line x1="55%" y1="0" x2="55%" y2="100%" stroke="#dde2ec" strokeWidth="3" />
+              <line x1="85%" y1="0" x2="85%" y2="100%" stroke="#dde2ec" strokeWidth="3" />
+              <line x1="0" y1="20%" x2="100%" y2="20%" stroke="#dde2ec" strokeWidth="3" />
+              <line x1="0" y1="58%" x2="100%" y2="58%" stroke="#dde2ec" strokeWidth="3" />
+              <line x1="0" y1="85%" x2="100%" y2="85%" stroke="#dde2ec" strokeWidth="3" />
+              {/* 공원/녹지 */}
+              <rect x="40%" y="44%" width="10%" height="12%" rx="4" fill="#d1e8d0" opacity="0.7" />
+              <rect x="16%" y="22%" width="8%" height="18%" rx="3" fill="#d1e8d0" opacity="0.6" />
+              <rect x="73%" y="44%" width="11%" height="14%" rx="4" fill="#d1e8d0" opacity="0.6" />
+              {/* 연결 점선 (핀 사이) */}
+              <line x1="20%" y1="46%" x2="62%" y2="36%" stroke="#93c5fd" strokeWidth="1.5" strokeDasharray="5 4" opacity="0.8" />
+              <line x1="20%" y1="46%" x2="24%" y2="78%" stroke="#93c5fd" strokeWidth="1.5" strokeDasharray="5 4" opacity="0.8" />
+              <line x1="62%" y1="36%" x2="68%" y2="74%" stroke="#93c5fd" strokeWidth="1.5" strokeDasharray="5 4" opacity="0.8" />
+              <line x1="24%" y1="78%" x2="68%" y2="74%" stroke="#5eead4" strokeWidth="1.5" strokeDasharray="5 4" opacity="0.8" />
+              {/* 핀 점 */}
+              <circle cx="20%" cy="46%" r="6" fill="white" stroke="#3b82f6" strokeWidth="2.5" />
+              <circle cx="62%" cy="36%" r="6" fill="white" stroke="#3b82f6" strokeWidth="2.5" />
+              <circle cx="24%" cy="78%" r="6" fill="white" stroke="#3b82f6" strokeWidth="2.5" />
+              <circle cx="68%" cy="74%" r="6" fill="white" stroke="#14b8a6" strokeWidth="2.5" />
+              {/* 작은 점들 */}
+              <circle cx="42%" cy="37%" r="4" fill="#60a5fa" opacity="0.7" />
+              <circle cx="53%" cy="48%" r="4" fill="#60a5fa" opacity="0.7" />
+              <circle cx="78%" cy="35%" r="4" fill="#2dd4bf" opacity="0.7" />
+              <circle cx="86%" cy="52%" r="4" fill="#2dd4bf" opacity="0.7" />
+            </svg>
 
-            <div className="absolute bottom-4 left-4 hidden items-center gap-2 rounded-lg bg-white/90 px-3 py-2 text-xs font-black text-blue-700 shadow-sm sm:flex">
-              <Mapjiri level={currentLevel.level} className="h-10 w-10 scale-50" />
+            {/* 맵지리 안내 뱃지 */}
+            <div className="absolute bottom-3 left-3 z-20 flex items-center gap-2 rounded-xl bg-white/95 px-3 py-2 text-xs font-black text-blue-700 shadow-md">
+              <Mapjiri level={currentLevel.level} className="h-7 w-7" />
               맵지리가 목적지까지 안내 중
             </div>
 
-            <div className="relative z-10 grid grid-cols-2 gap-2 px-4 py-4 sm:hidden">
-              {mapCases.map((item) => (
-                <div
-                  key={item.title}
-                  className="flex min-w-0 items-center gap-2 rounded-lg border border-white/80 bg-white/90 px-2.5 py-1.5 shadow-sm backdrop-blur"
-                >
-                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-white text-xs font-black text-white shadow-sm ${item.tone}`}>
-                    {item.initials}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-xs font-black leading-4 text-slate-950">{item.mobileTitle}</p>
-                    <p className="text-[11px] font-bold text-slate-500">{item.location}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {mapDots.map((dot) => (
-              <span
-                key={dot}
-                className={`absolute hidden h-3.5 w-3.5 rounded-full border-2 border-white shadow-sm sm:block ${dot}`}
-              />
-            ))}
-
+            {/* 핀 카드 — 프로필 사진 + 제목 + 위치 */}
             {mapCases.map((item) => (
               <div
                 key={item.title}
-                className={`absolute hidden min-w-[158px] items-center gap-3 rounded-lg border border-white/80 bg-white/90 px-3 py-2.5 shadow-lg shadow-slate-200/80 backdrop-blur sm:flex ${item.className}`}
+                className="absolute z-10 flex items-center gap-2.5 rounded-2xl bg-white/95 px-3 py-2.5 shadow-lg backdrop-blur-sm"
+                style={{ left: `${item.cx}%`, top: `${item.cy}%`, transform: "translate(-10%, -140%)" }}
               >
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-4 border-white text-sm font-black text-white shadow-sm ${item.tone}`}>
-                  {item.initials}
-                </div>
-                <div>
-                  <p className="text-sm font-black leading-5 text-slate-950">{item.title}</p>
-                  <p className="text-xs font-bold text-slate-500">{item.location}</p>
+                <img
+                  src={item.avatar}
+                  alt={item.title}
+                  className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-white shadow-sm"
+                />
+                <div className="min-w-0">
+                  <p className="whitespace-nowrap text-[13px] font-black text-slate-900">{item.title}</p>
+                  <p className="flex items-center gap-0.5 text-[11px] font-bold text-slate-400">
+                    <MapPin className="h-3 w-3 shrink-0" />{item.location}
+                  </p>
                 </div>
               </div>
             ))}
@@ -425,7 +430,7 @@ export function Home() {
                       Lv.{currentLevel.level} {currentLevel.name}
                     </Badge>
                     <h2 className="text-2xl font-black text-slate-950">{userRoadInStats.name}</h2>
-                    <p className="mt-1 text-sm font-bold text-slate-500">{userRoadInStats.career}</p>
+                    <p className="mt-1 truncate text-sm font-bold text-slate-500" title={userRoadInStats.career}>{userRoadInStats.career}</p>
                   </div>
                 </div>
               </div>
@@ -467,7 +472,7 @@ export function Home() {
                   </div>
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="text-xs font-bold text-slate-500">로드미션 완료 시 출석 인정 · {userRoadInStats.attendanceWeeks}주 연속</p>
+                      <p className="truncate text-xs font-bold text-slate-500" title={`로드미션 완료 시 출석 인정 · ${userRoadInStats.attendanceWeeks}주 연속`}>로드미션 완료 시 출석 인정 · {userRoadInStats.attendanceWeeks}주 연속</p>
                       <p className="mt-1 text-xl font-black text-blue-700">+{attendanceReward}코인 수령 가능</p>
                     </div>
                     <Badge variant="secondary" className="bg-white text-blue-700">

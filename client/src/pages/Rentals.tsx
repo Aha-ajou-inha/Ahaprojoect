@@ -14,7 +14,6 @@ import {
   Plus,
   Search,
   Sparkles,
-  Star,
   Users,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -158,10 +157,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "seminar-1",
     category: "seminar",
-    name: "강남 세미나실 A",
-    description: "프로젝터, 스크린, 마이크 준비",
-    location: "서울 강남구",
-    region: "서울 강남구",
+    name: "아주대 팔달관 세미나실 A",
+    description: "프로젝터, 스크린, 마이크 완비",
+    location: "경기 수원시 영통구",
+    region: "경기 수원시",
     capacity: 40,
     originalPrice: 50000,
     amenities: ["프로젝터", "스크린", "마이크"],
@@ -174,10 +173,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "seminar-2",
     category: "seminar",
-    name: "프리미엄 세미나홀",
+    name: "인천 송도 프리미엄 세미나홀",
     description: "대형 스크린, 음향 장비, Wi-Fi",
-    location: "서울 송파구",
-    region: "서울 송파구",
+    location: "인천 연수구 송도동",
+    region: "인천 연수구",
     capacity: 60,
     originalPrice: 45000,
     amenities: ["대형 스크린", "음향 장비", "Wi-Fi"],
@@ -190,10 +189,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "seminar-3",
     category: "seminar",
-    name: "소규모 발표실",
+    name: "광교 소규모 발표실",
     description: "화이트보드, 모니터, 콘센트",
-    location: "서울 서초구",
-    region: "서울 서초구",
+    location: "경기 수원시 영통구 광교",
+    region: "경기 수원시",
     capacity: 12,
     originalPrice: 18000,
     amenities: ["화이트보드", "모니터", "콘센트"],
@@ -206,10 +205,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "study-1",
     category: "study",
-    name: "교내 스터디룸 A",
+    name: "아주대 교내 스터디룸 A",
     description: "화이트보드, 콘센트, Wi-Fi",
-    location: "서울 광진구",
-    region: "서울 광진구",
+    location: "경기 수원시 영통구 원천동",
+    region: "경기 수원시",
     capacity: 6,
     originalPrice: 12000,
     amenities: ["화이트보드", "콘센트", "Wi-Fi"],
@@ -222,10 +221,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "study-2",
     category: "study",
-    name: "조용한 스터디룸 B",
+    name: "인천 부평 조용한 스터디룸 B",
     description: "모니터, 에어컨, 콘센트",
-    location: "서울 마포구",
-    region: "서울 마포구",
+    location: "인천 부평구 부평동",
+    region: "인천 부평구",
     capacity: 4,
     originalPrice: 14000,
     amenities: ["모니터", "에어컨", "콘센트"],
@@ -238,10 +237,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "study-3",
     category: "study",
-    name: "팀플 스터디룸 C",
+    name: "광교 팀플 스터디룸 C",
     description: "화이트보드, 콘센트, Wi-Fi",
-    location: "서울 성북구",
-    region: "서울 성북구",
+    location: "경기 수원시 영통구 광교",
+    region: "경기 수원시",
     capacity: 8,
     originalPrice: 16000,
     amenities: ["화이트보드", "콘센트", "Wi-Fi"],
@@ -254,10 +253,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "meeting-1",
     category: "meeting",
-    name: "강남 회의실 A",
+    name: "수원 광교 회의실 A",
     description: "화이트보드, 모니터, 화상회의, 콘센트",
-    location: "서울 강남구",
-    region: "서울 강남구",
+    location: "경기 수원시 영통구 광교",
+    region: "경기 수원시",
     capacity: 6,
     originalPrice: 56000,
     amenities: ["화이트보드", "모니터", "화상회의", "콘센트"],
@@ -270,10 +269,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "meeting-2",
     category: "meeting",
-    name: "프리미엄 회의실",
+    name: "인천 송도 프리미엄 회의실",
     description: "화이트보드, 모니터, 노트북 연결, 회의 테이블",
-    location: "서울 송파구",
-    region: "서울 송파구",
+    location: "인천 연수구 송도동",
+    region: "인천 연수구",
     capacity: 12,
     originalPrice: 45000,
     amenities: ["화이트보드", "모니터", "노트북 연결", "회의 테이블"],
@@ -286,10 +285,10 @@ const BASE_SPACES: RentalSpace[] = [
   {
     id: "meeting-3",
     category: "meeting",
-    name: "소규모 회의실",
+    name: "안양 소규모 회의실",
     description: "화이트보드, 모니터, 콘센트",
-    location: "서울 서초구",
-    region: "서울 서초구",
+    location: "경기 안양시 동안구",
+    region: "경기 안양시",
     capacity: 6,
     originalPrice: 18000,
     amenities: ["화이트보드", "모니터", "콘센트"],
@@ -981,9 +980,9 @@ export function Rentals() {
                   return (
                     <Card
                       key={space.id}
-                      className="overflow-hidden rounded-[24px] border-blue-100 shadow-[0_12px_32px_rgba(37,99,235,0.08)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(37,99,235,0.12)]"
+                      className="flex flex-col overflow-hidden rounded-[24px] border-blue-100 shadow-[0_12px_32px_rgba(37,99,235,0.08)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(37,99,235,0.12)]"
                     >
-                      <CardContent className="p-4">
+                      <CardContent className="flex flex-1 flex-col p-4">
                         <div className="relative overflow-hidden rounded-[18px]">
                           <img
                             src={space.image}
@@ -1010,60 +1009,55 @@ export function Rentals() {
                           )}
                         </div>
 
-                        <div className="mt-4">
-                          <h3 className="text-[1.35rem] font-black text-slate-950">{space.name}</h3>
-                          <p className="mt-2 text-sm font-bold leading-6 text-slate-500">
+                        <div className="mt-4 flex flex-1 flex-col">
+                          <h3 className="truncate text-base font-black text-slate-950">{space.name}</h3>
+                          <p className="mt-1 truncate text-sm font-bold text-slate-500">
                             {space.description}
                           </p>
 
-                          <div className="mt-3 space-y-2 text-sm font-bold text-slate-600">
-                            <div className="flex items-center gap-2">
-                              <MapPin className="h-4 w-4 text-blue-600" />
-                              {space.location}
+                          <div className="mt-2 space-y-1 text-sm font-bold text-slate-600">
+                            <div className="flex items-center gap-1.5 truncate">
+                              <MapPin className="h-3.5 w-3.5 shrink-0 text-blue-600" />
+                              <span className="truncate">{space.location}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <Users className="h-4 w-4 text-blue-600" />
+                            <div className="flex items-center gap-1.5">
+                              <Users className="h-3.5 w-3.5 shrink-0 text-blue-600" />
                               최대 {space.capacity}명
                             </div>
                           </div>
 
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {space.amenities.map((amenity) => (
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {space.amenities.slice(0, 3).map((amenity) => (
                               <Badge
                                 key={amenity}
                                 variant="secondary"
-                                className="bg-slate-50 text-slate-600 hover:bg-slate-50"
+                                className="bg-slate-50 text-xs text-slate-600 hover:bg-slate-50"
                               >
                                 {amenity}
                               </Badge>
                             ))}
                           </div>
 
-                          <div className="mt-4 flex items-end justify-between">
-                            <div>
-                              <p className="text-sm font-bold text-slate-400 line-through">
+                          <div className="mt-auto pt-4 flex items-center justify-between gap-2">
+                            <div className="min-w-0">
+                              <p className="text-xs font-bold text-slate-400 line-through">
                                 {formatPrice(space.originalPrice)}
                               </p>
-                              <p className="text-[1.9rem] font-black text-blue-700">
+                              <p className="text-lg font-black text-blue-700 whitespace-nowrap">
                                 {formatPrice(discountedPrice)}
                               </p>
                             </div>
-                            <Badge className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                              붕붕이 {currentLevel.discount}% 할인
-                            </Badge>
-                          </div>
-
-                          <div className="mt-4 flex items-center justify-between gap-3">
-                            <div className="flex min-w-0 items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 text-xs font-black text-emerald-700">
-                              <Star className="h-3.5 w-3.5 fill-emerald-500 text-emerald-500" />
-                              {currentLevel.name} 할인 적용 가능
+                            <div className="flex shrink-0 flex-col items-end gap-1.5">
+                              <Badge className="whitespace-nowrap bg-blue-50 text-xs text-blue-700 hover:bg-blue-50">
+                                {currentLevel.name} {currentLevel.discount}% 할인
+                              </Badge>
+                              <Button
+                                className="h-9 rounded-xl bg-blue-600 px-4 text-sm font-black hover:bg-blue-700"
+                                onClick={() => openBookingModal(space)}
+                              >
+                                예약하기
+                              </Button>
                             </div>
-                            <Button
-                              className="h-11 shrink-0 rounded-xl bg-blue-600 px-4 text-sm font-black hover:bg-blue-700"
-                              onClick={() => openBookingModal(space)}
-                            >
-                              예약하기
-                            </Button>
                           </div>
                         </div>
                       </CardContent>
@@ -1127,8 +1121,8 @@ export function Rentals() {
                   <p className="mt-4 text-base font-black leading-7 text-slate-800">
                     {tabMeta.mascotCaption}
                   </p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/92 px-3 py-2 text-sm font-black text-blue-700 shadow-sm">
-                    <Sparkles className="h-4 w-4" />
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/92 px-3 py-2 text-sm font-black text-blue-700 shadow-sm whitespace-nowrap">
+                    <Sparkles className="h-4 w-4 shrink-0" />
                     현재 할인 {currentLevel.discount}% 자동 적용
                   </div>
                 </div>
@@ -1303,7 +1297,7 @@ export function Rentals() {
                   onChange={(event) =>
                     setRegisterForm((prevForm) => ({ ...prevForm, location: event.target.value }))
                   }
-                  placeholder="예) 서울 강남구"
+                  placeholder="예) 경기 수원시 영통구"
                   className="h-12 rounded-2xl border-blue-100"
                 />
               </div>
@@ -1314,7 +1308,7 @@ export function Rentals() {
                   onChange={(event) =>
                     setRegisterForm((prevForm) => ({ ...prevForm, region: event.target.value }))
                   }
-                  placeholder="예) 서울 강남구"
+                  placeholder="예) 경기 수원시"
                   className="h-12 rounded-2xl border-blue-100"
                 />
               </div>
